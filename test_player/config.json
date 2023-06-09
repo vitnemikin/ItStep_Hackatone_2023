@@ -7,12 +7,12 @@
         "port": 8200
     },
     "controls": {
-        "up": "ArrowUp",
-        "down": "ArrowDown",
-        "left": "ArrowLeft",
-        "right": "ArrowRight",
-        "switch_unit": "Tab",
-        "catch": "KeyQ",
-        "throw": "KeyW"
+        "up": "up",
+        "down": "down",
+        "left": "left",
+        "right": "right",
+        "switch_unit": "tab",
+        "catch": "q",
+        "throw": "w"
     }
 }
