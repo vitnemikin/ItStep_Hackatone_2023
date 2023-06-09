@@ -1,7 +1,7 @@
 export function prompt(message, callback) {
     process.stdout.write(message + " ");
     process.stdin.once("data", (data) => {
-        data = data.toString().trim().toLowerCase();
+        data = data.toString().trim();
         callback(data);
     });
 }
