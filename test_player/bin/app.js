@@ -54,7 +54,7 @@ export class Application {
     #registeredHandler(uid) {
         log("Наш регистрационный ключ", uid);
         log(this.keyboard.help());
-        log("Ждём начала игры...");
+        this.#listen();
     }
 
     #requestHandler(req, res) {
@@ -106,5 +106,11 @@ export class Application {
                 res.write("Not found");
         }
         res.end();
+    }
+
+    #listen() {
+        this.gamePlayer.listen(this.config.self.port, () => {
+            log("Ждём начала игры...");
+        });
     }
 }

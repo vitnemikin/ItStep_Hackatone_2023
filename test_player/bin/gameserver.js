@@ -9,24 +9,38 @@ export class GameServer {
     }
 
     register(player, callback) {
-        let endpoint = this.baseUrl + "register?";
+        let endpoint = this.baseUrl + "register";
         let params = new URLSearchParams();
         params.append("name", player.name);
         params.append("host", player.ip);
         params.append("port", player.port);
-        let url = endpoint + params.toString();
+        let href = endpoint + "?" + params;
         
-        fetch(url)
+        fetch(href)
         .then(data => data.json())
         .then(this.#registered.bind(this))
         .then(callback);
+        //TODO: сделать обработку ошибок http
+    }
+
+    refresh() {
+        let endpoint = this.baseUrl + "refresh";
+        let params = new URLSearchParams();
+        params.append("uid", this.uid)
+        let href = endpoint + "?" + params;
+        fetch(href);
+        //TODO: сделать обработку ошибок http
+    }
+
+    stop() {
+        clearInterval(this.poll);
     }
 
     #registered(data) {
         if (data.uid) {
             this.uid = data.uid;
             this.timeout = data.timeout - 1;
-            this.poll = setInterval(this.refresh, this.timeout * 1000);
+            this.poll = setInterval(this.refresh.bind(this), this.timeout * 1000);
             return this.uid;
         }
     }
