@@ -53,7 +53,7 @@ export class Application {
 
     #registeredHandler(uid) {
         log("Наш регистрационный ключ", uid);
-        this.keyboard.showHelp();
+        log(this.keyboard.help());
         log("Ждём начала игры...");
     }
 

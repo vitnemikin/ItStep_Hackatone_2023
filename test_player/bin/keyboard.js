@@ -3,8 +3,8 @@ export class Keyboard {
         this.controls = controls;
     }
 
-    showHelp() {
-        console.log(`
+    help() {
+        return `
         Управление в игре:
          - вперёд:      ${this.controls.up}
          - назад:       ${this.controls.down}
@@ -13,6 +13,6 @@ export class Keyboard {
          - выбор юнита: ${this.controls.switch_unit}
          - поймать:     ${this.controls.catch}
          - бросок:      ${this.controls.throw}
-        `);
+        `;
     }
 }
