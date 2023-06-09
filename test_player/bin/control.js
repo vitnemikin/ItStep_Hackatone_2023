@@ -1,8 +1,10 @@
 export class Control {
     listening = false;
+    action = {unit:0, switch:0, type:"", angle:0, force:0};
+
     constructor(controls) {
         this.controls = controls;
-        this.action = {};
+        
     }
 
     help() {
@@ -21,9 +23,9 @@ export class Control {
     getAction(unit) {
         if (unit !== this.action.unit) {
             this.action.unit = unit;
-            this.switch = false;
+            this.action.switch = false;
         }
-        if (this.switch) return {select: "auto"};
+        if (this.action.switch) return {select: "auto"};
         return {unit: unit,
                     action: {
                         type:  this.action.type,
@@ -36,6 +38,7 @@ export class Control {
     startListenKeys() {
         if (this.listening) return;
         this.listening = true;
+        
     }
 
     stopListenKeys() {
