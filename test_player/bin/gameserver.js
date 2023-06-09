@@ -32,7 +32,7 @@ export class GameServer {
         //TODO: сделать обработку ошибок http
     }
 
-    stop() {
+    close() {
         clearInterval(this.poll);
     }
 
