@@ -1,0 +1,19 @@
+{
+  "name": "test_player",
+  "version": "1.0.0",
+  "description": "",
+  "main": "./bin/main.js",
+  "type": "module",
+  "bin": {
+    "test_player": "bin/main.js"
+  },
+  "scripts": {
+    "start": "node ./bin/main.js",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "VN",
+  "license": "ISC",
+  "devDependencies": {
+    "@types/node": "^20.2.5"
+  }
+}
