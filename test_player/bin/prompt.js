@@ -6,9 +6,12 @@ export function prompt(message, callback) {
     });
 }
 
-
-// if (data.includes("exit")) {
-//     process.stdin.pause();
-//     app.stop();
-//     setTimeout(process.exit, 1000);
-// }
+export function promptExit() {
+    prompt("Type 'exit' to stop application or press 'Ctrl+C' to kill it", () => {
+        if (data.toLowerCase().includes("exit")) {
+            process.stdin.pause();
+            app.stop();
+            setTimeout(process.exit, 1000);
+        }        
+    });
+}
