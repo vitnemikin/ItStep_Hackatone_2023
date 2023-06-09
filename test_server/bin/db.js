@@ -23,8 +23,11 @@ export class PlayerDB {
 
     newPlayer(name, host, port, timeout) {
         let uid = md5sum(name);
-        this.db.set(uid, new Player(name, host, port, timeout));
-        console.log(`New player '${name}' registered from ${host}:${port}`);
+        let exists = this.refreshPlayer(uid);
+        if (!exists) {
+            this.db.set(uid, new Player(name, host, port, timeout));
+            console.log(`New player '${name}' registered from ${host}:${port}`);
+        }
         return uid;
     }
 
