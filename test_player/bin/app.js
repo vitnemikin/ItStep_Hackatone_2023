@@ -19,13 +19,13 @@ export class Application {
             ports_pool_size: 20
         },
         controls: {
-            up: "ArrowUp",
-            down: "ArrowDown",
-            left: "ArrowLeft",
-            right: "ArrowRight",
-            switch_unit: "Tab",
-            catch: "KeyQ",
-            throw: "KeyW"
+            up: "up",
+            down: "down",
+            left: "left",
+            right: "right",
+            switch_unit: "tab",
+            catch: "q",
+            throw: "w"
         }
     }
     constructor(config) {
@@ -100,9 +100,29 @@ export class Application {
         res.end();
     }
 
+
     #listen() {
-        this.gamePlayer.listen(this.config.self.port, () => {
-            log("Ждём начала игры...");
+        let currentPort = this.config.self.port;
+        let listening = false;
+
+        this.gamePlayer.on("error", (err) => {
+            if (err.code == 'EADDRINUSE') {
+                this.gamePlayer.close();
+                currentPort++;
+                if (currentPort === this.config.self.port + this.config.self.ports_pool_size) {
+                    currentPort = this.config.self.port;
+                }
+
+                this.gamePlayer.listen(currentPort, () => {
+                    if (!listening) log("Ждём начала игры...");
+                    listening = true;
+                });
+            } else throw err;
+        });
+
+        this.gamePlayer.listen(currentPort, () => {
+            if (!listening) log("Ждём начала игры...");
+            listening = true;
         });
     }
 }
