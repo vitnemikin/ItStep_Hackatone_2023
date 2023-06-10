@@ -54,6 +54,7 @@ export class Control {
 
     }
 
+    // К сожалению, в node нет события 'keyup', поэтому управление здесь корявое :'(
     #keyListener(char, key) {
         switch(key.name) {
             case this.controls.switch_unit:
